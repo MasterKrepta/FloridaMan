@@ -21,10 +21,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update() {
         movement = GetInput();
-        facingRight = isFacingRight();
-        if (!facingRight) {
-            FlipDirection();
-        }
+        //facingRight = isFacingRight();
+        //if (!facingRight) {
+        //    FlipDirection();
+        //}
         isGrounded = CheckGrounded();
         transform.Translate(movement * speed * Time.deltaTime);
 

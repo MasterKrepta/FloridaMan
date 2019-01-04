@@ -13,8 +13,8 @@ public class Unit : MonoBehaviour, IDamaggable
 
     private void OnEnable() {
         CurrentHealth = maxHealthSetter;
-        GameEvents.OnGooseDied += this.Die;
-        GameEvents.OnGooseHit += this.TakeDamage;
+        GameEvents.OnGooseDied += Die;
+        //GameEvents.OnGooseHit += TakeDamage;
     }
     public void Die(Unit unit) {
         
@@ -22,20 +22,23 @@ public class Unit : MonoBehaviour, IDamaggable
     }
 
     public void TakeDamage(Unit unit, float  dmg) {
-        Debug.Log(unit.name);
         unit.CurrentHealth -= dmg;
-        Debug.Log(dmg + " given to " + unit.name);
-            Debug.Log(unit.name + " has taken damage: " + CurrentHealth + " Remaining");
-            if (CurrentHealth <= 0) {
-                GameEvents.OnGooseDied(this);
-            }
+        GameEvents.OnGooseHit(this);
+        if (CurrentHealth <= 0) {
+            GameEvents.OnGooseDied(this);
+        }
+
+
+        
     }
 
 
 
     private void OnDestroy() {
-        GameEvents.OnGooseHit -= TakeDamage;
+        //GameEvents.OnGooseHit -= TakeDamage;
         GameEvents.OnGooseDied -= Die;
+
+
     }
 
     

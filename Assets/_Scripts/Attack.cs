@@ -33,8 +33,9 @@ public class Attack : MonoBehaviour
             //Debug.Log("Launch High Attack");
 
             if (Physics.Raycast(PunchPoint.position, PunchPoint.right, out hit, punchRange)) {
-                
-                GameEvents.OnGooseHit(hit.collider.GetComponent<Unit>(), punchPower);
+                Unit unitHit = hit.transform.GetComponent<Unit>();
+                unitHit.TakeDamage(unitHit, punchPower);
+                //GameEvents.OnGooseHit(unitHit, punchPower);
             }
             StartCoroutine(PunchCooldown());
 
@@ -47,7 +48,10 @@ public class Attack : MonoBehaviour
             //? Should Kick include a knockback that punch does not (maybe it should fire slower)
             if (Physics.Raycast(KickPoint.position, KickPoint.right, out hit, kickRange)) {
                 Debug.Log(hit.collider.GetComponent<Unit>().name);
-                GameEvents.OnGooseHit(hit.collider.GetComponent<Unit>(), kickPower);
+                Unit unitHit = hit.transform.GetComponent<Unit>();
+                unitHit.TakeDamage(unitHit, kickPower);
+                //GameEvents.OnGooseHit(hit.collider.GetComponent<Unit>(), kickPower);
+
             }
             StartCoroutine(KickCooldown());
         }

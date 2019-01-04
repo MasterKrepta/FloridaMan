@@ -5,10 +5,10 @@ using UnityEngine;
 
 public static class GameEvents
 {
-    public static Action<Unit> OnUnitHit;
+    public static Action<Unit> OnUnitHit = delegate { };
 
-    public static Action OnPlayerHit;
+    public static Action OnPlayerHit = delegate { };
 
-    public static Action<Unit, float> OnGooseHit;
-    public static Action<Unit> OnGooseDied;
+    public static Action<Unit> OnGooseHit = delegate { };
+    public static Action<Unit> OnGooseDied = delegate { };
 }
