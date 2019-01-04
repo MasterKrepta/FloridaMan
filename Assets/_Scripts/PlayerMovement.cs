@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]bool isGrounded = false;
     Rigidbody rb;
     [SerializeField]float Jumpforce = 100f;
+    bool facingRight = true;
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update() {
         movement = GetInput();
+        facingRight = isFacingRight();
+        if (!facingRight) {
+            FlipDirection();
+        }
         isGrounded = CheckGrounded();
         transform.Translate(movement * speed * Time.deltaTime);
 
@@ -28,11 +33,23 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void FlipDirection() {
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        
+    }
+
     private Vector3 GetInput() {
         return new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
     }
 
     bool CheckGrounded() {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+    }
+
+    bool isFacingRight() {
+        if (movement.x < 0) {
+            return false;
+        }
+        return true;
     }
 }

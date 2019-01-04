@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IDamaggable 
 {
     float CurrentHealth { get; set; }
-    float MyProperty { get; set; }
-    void TakeDamage(float dmg);
-    void Die();
+    float MaxHealth { get; set; }
+    void TakeDamage(Unit unit, float dmg);
+    void Die(Unit unit);
 }
