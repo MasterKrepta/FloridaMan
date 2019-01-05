@@ -22,6 +22,7 @@ public class Unit : MonoBehaviour, IDamaggable
     }
 
     public void TakeDamage(Unit unit, float  dmg) {
+        //TODO slow down time when we are hit
         unit.CurrentHealth -= dmg;
         GameEvents.OnGooseHit(this);
         if (CurrentHealth <= 0) {

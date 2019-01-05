@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    [SerializeField] LayerMask hitMask;
     [SerializeField] Transform PunchPoint;
     [SerializeField] float punchRange;
     [SerializeField] float punchDelay;
@@ -18,11 +19,7 @@ public class Attack : MonoBehaviour
     [SerializeField] float punchPower = 1;
     [SerializeField] float kickPower = 1.5f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -32,7 +29,7 @@ public class Attack : MonoBehaviour
             RaycastHit hit;
             //Debug.Log("Launch High Attack");
 
-            if (Physics.Raycast(PunchPoint.position, PunchPoint.right, out hit, punchRange)) {
+            if (Physics.Raycast(PunchPoint.position, PunchPoint.right, out hit, punchRange, hitMask)) {
                 Unit unitHit = hit.transform.GetComponent<Unit>();
                 unitHit.TakeDamage(unitHit, punchPower);
                 //GameEvents.OnGooseHit(unitHit, punchPower);
@@ -46,10 +43,10 @@ public class Attack : MonoBehaviour
             //Debug.Log("Launch Low Attack");
 
             //? Should Kick include a knockback that punch does not (maybe it should fire slower)
-            if (Physics.Raycast(KickPoint.position, KickPoint.right, out hit, kickRange)) {
-                Debug.Log(hit.collider.GetComponent<Unit>().name);
+            if (Physics.Raycast(KickPoint.position, KickPoint.right, out hit, kickRange, hitMask)) {
                 Unit unitHit = hit.transform.GetComponent<Unit>();
                 unitHit.TakeDamage(unitHit, kickPower);
+                GameEvents.OnKnockBack(unitHit);
                 //GameEvents.OnGooseHit(hit.collider.GetComponent<Unit>(), kickPower);
 
             }
@@ -57,12 +54,12 @@ public class Attack : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected() {
-        Color punchColor = Color.red;
-        Color kickColor = Color.green;
-        Debug.DrawLine(PunchPoint.position, PunchPoint.position + new Vector3(punchRange, 0, 0), punchColor, .01f);
-        Debug.DrawLine(KickPoint.position, KickPoint.position + new Vector3(kickRange, 0, 0), kickColor, .01f);
-    }
+    //private void OnDrawGizmosSelected() {
+    //    Color punchColor = Color.red;
+    //    Color kickColor = Color.green;
+    //    Debug.DrawLine(PunchPoint.position, PunchPoint.position + new Vector3(punchRange, 0, 0), punchColor, .01f);
+    //    Debug.DrawLine(KickPoint.position, KickPoint.position + new Vector3(kickRange, 0, 0), kickColor, .01f);
+    //}
 
     IEnumerator PunchCooldown() {
         canPunch = false;

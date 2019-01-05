@@ -10,9 +10,9 @@ public class SpawnParticles : MonoBehaviour
     // Start is called before the first frame update
 
     private void Start() {
+        //!This should work for every goose hit and not need to be unsubed
         GameEvents.OnGooseHit += CreateParatileAtPoint;
         
-
     }
 
     void CreateParatileAtPoint(Unit unit) {
