@@ -8,11 +8,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 5f;
     float distToGround;
     Vector3 movement;
+    
+    //Jumping
     [SerializeField]bool isGrounded = false;
     Rigidbody rb;
-    [SerializeField]float Jumpforce = 100f;
+    [SerializeField]float Jumpforce = 10f;
     bool facingRight = true;
-    
+    [SerializeField] float fallMulti = 2.5f;
+    [SerializeField] float lowJumpMulti = 2f;
+    [SerializeField] float slideForce = 7f;
+    [SerializeField]bool sliding = false;
+    private float slideDelay = .5f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,22 +28,67 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
     private void Update() {
-        movement = GetInput();
-        //facingRight = isFacingRight();
-        //if (!facingRight) {
-        //    FlipDirection();
-        //}
         isGrounded = CheckGrounded();
-        transform.Translate(movement * speed * Time.deltaTime);
+        //?Movement is disabled while jumping.. This Will affect gameplay
+        //TODO Is this still feel good to play
+        if (isGrounded) {
+            movement = GetInput();
+        }
+        
+        //Remove all control if we are sliding
+        if (!sliding) {
+            if (movement.x < 0) {
+                Flip();
+            } else {
+                if (movement != Vector3.zero) { // Prevent flipping if we stop while facing left
+                    transform.eulerAngles = new Vector3(0, 0, 0);
+                }
 
-        if (Input.GetButtonDown("Jump") && isGrounded) {
-            rb.AddForce(Vector3.up * Jumpforce);
+            }
+
+            //transform.Translate(movement * speed * Time.deltaTime);
+            if (movement.x != 0 ) {
+                transform.Translate(Vector3.right * speed * Time.deltaTime);
+            }
+            if (Input.GetButtonDown("Jump") && isGrounded) {
+                Jump();
+            }
+
+            ModifyVelocityWhenJumping();
+        }
+        if (Input.GetKeyDown(KeyCode.C) && rb.velocity.x != 0 && sliding == false) {
+            Slide();
+            //TODO Draw Particle Effect
         }
     }
 
-    private void FlipDirection() {
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        
+    private void Slide() {
+        rb.velocity = transform.right * slideForce;
+        StartCoroutine(ToggleSlide());
+    }
+
+    IEnumerator ToggleSlide() {
+        sliding = true;
+        yield return new WaitForSeconds(slideDelay);
+        sliding = false;
+        rb.velocity = Vector3.zero;
+    }
+
+    private void ModifyVelocityWhenJumping() {
+        if (rb.velocity.y < 0) {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMulti - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump")) {
+            rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMulti - 1) * Time.deltaTime;
+        }
+    }
+
+    private void Jump() {
+        rb.velocity = Vector3.up * Jumpforce;
+    }
+
+    private void Flip() {
+        transform.eulerAngles = new Vector3(0, 180, 0);
     }
 
     private Vector3 GetInput() {
@@ -46,10 +99,4 @@ public class PlayerMovement : MonoBehaviour
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
 
-    bool isFacingRight() {
-        if (movement.x < 0) {
-            return false;
-        }
-        return true;
-    }
 }

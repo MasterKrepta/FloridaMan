@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    [SerializeField] GameObject hitMarker; //FOR TESTING
     [SerializeField] LayerMask hitMask;
     [SerializeField] Transform PunchPoint;
     [SerializeField] float punchRange;
@@ -31,6 +32,7 @@ public class Attack : MonoBehaviour
 
             if (Physics.Raycast(PunchPoint.position, PunchPoint.right, out hit, punchRange, hitMask)) {
                 Unit unitHit = hit.transform.GetComponent<Unit>();
+                Instantiate(hitMarker, hit.point, Quaternion.identity);
                 unitHit.TakeDamage(unitHit, punchPower);
                 //GameEvents.OnGooseHit(unitHit, punchPower);
             }
@@ -45,6 +47,7 @@ public class Attack : MonoBehaviour
             //? Should Kick include a knockback that punch does not (maybe it should fire slower)
             if (Physics.Raycast(KickPoint.position, KickPoint.right, out hit, kickRange, hitMask)) {
                 Unit unitHit = hit.transform.GetComponent<Unit>();
+                Instantiate(hitMarker, hit.point, Quaternion.identity);
                 unitHit.TakeDamage(unitHit, kickPower);
                 GameEvents.OnKnockBack(unitHit);
                 //GameEvents.OnGooseHit(hit.collider.GetComponent<Unit>(), kickPower);
@@ -58,7 +61,7 @@ public class Attack : MonoBehaviour
     //    Color punchColor = Color.red;
     //    Color kickColor = Color.green;
     //    Debug.DrawLine(PunchPoint.position, PunchPoint.position + new Vector3(punchRange, 0, 0), punchColor, .01f);
-    //    Debug.DrawLine(KickPoint.position, KickPoint.position + new Vector3(kickRange, 0, 0), kickColor, .01f);
+    //    Debug.DrawLine(KickPoint.eulerAngles, KickPoint.position + new Vector3(kickRange, 0, 0), kickColor, .01f);
     //}
 
     IEnumerator PunchCooldown() {

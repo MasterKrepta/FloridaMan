@@ -783,7 +783,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 400033596}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.059000015, y: 19.5, z: 0}
+  m_LocalPosition: {x: 0.0916, y: 19.5, z: 0}
   m_LocalScale: {x: 0.1, y: 50, z: 1}
   m_Children: []
   m_Father: {fileID: 1348135686}
@@ -1405,7 +1405,7 @@ GameObject:
   m_Layer: 0
   m_Name: Punch
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1501,7 +1501,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996797020}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.5, z: -17.3}
+  m_LocalPosition: {x: 0, y: 5.2, z: -13.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1811,7 +1811,7 @@ GameObject:
   m_Layer: 0
   m_Name: Kick
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1822,13 +1822,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1282300505}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.2588191, w: 0.9659258}
   m_LocalPosition: {x: 0.20999998, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1397696760}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30}
 --- !u!1 &1304600038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2201,7 +2201,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397696756}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2222,9 +2222,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65ffebe31faccb14a9b87e50dea51673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 10
   isGrounded: 0
-  Jumpforce: 300
+  Jumpforce: 10
+  fallMulti: 7
+  lowJumpMulti: 5
+  slideForce: 15
+  sliding: 0
 --- !u!54 &1397696762
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2253,6 +2257,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b40596a0e2919f4781d17149725da89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitMarker: {fileID: 8501452426496383364, guid: 1217b86f6bc76b84d88940f5f1f7b50e,
+    type: 3}
   hitMask:
     serializedVersion: 2
     m_Bits: 512
@@ -2946,12 +2952,12 @@ PrefabInstance:
     - target: {fileID: 7776671669884767045, guid: 47c216a1349608b4c87248e3b7aad5b4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.96
+      value: 1.146
       objectReference: {fileID: 0}
     - target: {fileID: 7776671669884767045, guid: 47c216a1349608b4c87248e3b7aad5b4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.532
       objectReference: {fileID: 0}
     - target: {fileID: 7776671669884767045, guid: 47c216a1349608b4c87248e3b7aad5b4,
         type: 3}
@@ -3003,6 +3009,5 @@ PrefabInstance:
       propertyPath: maxHealthSetter
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7776671669884767041, guid: 47c216a1349608b4c87248e3b7aad5b4, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47c216a1349608b4c87248e3b7aad5b4, type: 3}
