@@ -14,7 +14,7 @@ public class FlashOnHit : MonoBehaviour
         GameEvents.OnGooseHit += StartFlash;
     }
 
-    void StartFlash(Unit unit) {
+    void StartFlash(Unit unit, RaycastHit hit) {
         StartCoroutine(Flash(unit));
         
     }

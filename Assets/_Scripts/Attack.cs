@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,20 +21,32 @@ public class Attack : MonoBehaviour
     [SerializeField] float punchPower = 1;
     [SerializeField] float kickPower = 1.5f;
 
+    Animator anim;
+    string leftPunch = "LeftPunch";
+    string rightPunch = "RightPunch";
+    string nextPunch;
 
+    private void Awake() {
+        anim = GetComponentInChildren<Animator>();
+        nextPunch = rightPunch;
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         
         if (Input.GetButton("HighAttack") && canPunch) {
+            anim.Play(nextPunch);
+            TogglePunch(nextPunch);
             RaycastHit hit;
             //Debug.Log("Launch High Attack");
-
+            //Instantiate(hitMarker, PunchPoint.position + new Vector3(punchRange, 0, 0), Quaternion.identity); !TESTING
             if (Physics.Raycast(PunchPoint.position, PunchPoint.right, out hit, punchRange, hitMask)) {
                 Unit unitHit = hit.transform.GetComponent<Unit>();
-                Instantiate(hitMarker, hit.point, Quaternion.identity);
-                unitHit.TakeDamage(unitHit, punchPower);
+
+                //Instantiate(hitMarker, hit.point, Quaternion.identity);
+
+                unitHit.TakeDamage(unitHit, punchPower, hit);
                 //GameEvents.OnGooseHit(unitHit, punchPower);
             }
             StartCoroutine(PunchCooldown());
@@ -41,19 +54,31 @@ public class Attack : MonoBehaviour
         }
 
         if (Input.GetButton("LowAttack") && canKick) {
+            anim.Play("Kicking");
             RaycastHit hit;
             //Debug.Log("Launch Low Attack");
-
+            //Instantiate(hitMarker, KickPoint.position + new Vector3(kickRange,0,0), Quaternion.identity);
             //? Should Kick include a knockback that punch does not (maybe it should fire slower)
             if (Physics.Raycast(KickPoint.position, KickPoint.right, out hit, kickRange, hitMask)) {
                 Unit unitHit = hit.transform.GetComponent<Unit>();
-                Instantiate(hitMarker, hit.point, Quaternion.identity);
-                unitHit.TakeDamage(unitHit, kickPower);
+
+                //Instantiate(hitMarker, hit.point, Quaternion.identity);
+
+                unitHit.TakeDamage(unitHit, kickPower, hit);
                 GameEvents.OnKnockBack(unitHit);
                 //GameEvents.OnGooseHit(hit.collider.GetComponent<Unit>(), kickPower);
 
             }
             StartCoroutine(KickCooldown());
+        }
+    }
+
+    private void TogglePunch(string lastPunch) {
+        if (lastPunch == rightPunch) {
+            nextPunch = leftPunch;
+        }
+        else {
+            nextPunch = rightPunch;
         }
     }
 

@@ -13,18 +13,17 @@ public class KnockBack : MonoBehaviour
 
     void Knockback(Unit unit) {
         //?Trying to do this without RigidBodies
-        StartCoroutine(KnockbackMovement(unit));
-        
-        
+        StartCoroutine(KnockbackMovement(unit, this.gameObject));
         //TODO Smooth out this movement
     }
 
-    IEnumerator KnockbackMovement(Unit unit) {
-        Vector3 startPos = unit.transform.position;
+    IEnumerator KnockbackMovement(Unit unit, GameObject hitDir) {
+        //unit.transform.eulerAngles = new Vector3(0,180,0);
+        //Vector3 startPos = unit.transform.position;
+        unit.GetComponent<Rigidbody>().AddRelativeForce(hitDir.transform.right * knockbackForce);
+        //Vector3 knockbackPos = new Vector3(knockbackForce, 0, 0) + startPos;
 
-        Vector3 knockbackPos = new Vector3(knockbackForce, 0, 0) + startPos;
-
-        unit.transform.position = Vector3.Slerp(startPos, knockbackPos, 0.25f);
+        //unit.transform.position = Vector3.Slerp(startPos, knockbackPos, 0.25f);
         yield return new WaitForSeconds(.25f);
     }
     private void OnDestroy() {

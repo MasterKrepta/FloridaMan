@@ -21,10 +21,10 @@ public class Unit : MonoBehaviour, IDamaggable
         Destroy(unit.gameObject);
     }
 
-    public void TakeDamage(Unit unit, float  dmg) {
+    public void TakeDamage(Unit unit, float  dmg, RaycastHit hit) {
         //TODO slow down time when we are hit
         unit.CurrentHealth -= dmg;
-        GameEvents.OnGooseHit(this);
+        GameEvents.OnGooseHit(this, hit);
         if (CurrentHealth <= 0) {
             GameEvents.OnGooseDied(this);
         }

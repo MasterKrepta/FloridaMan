@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 5f;
     float distToGround;
     Vector3 movement;
-    
+    Animator anim;
     //Jumping
     [SerializeField]bool isGrounded = false;
     Rigidbody rb;
@@ -19,21 +19,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float slideForce = 7f;
     [SerializeField]bool sliding = false;
     private float slideDelay = .5f;
+    [SerializeField] float initialJump = 20f;
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         distToGround = GetComponent<Collider>().bounds.extents.y;
         rb = GetComponent<Rigidbody>();
     }
     private void Update() {
         isGrounded = CheckGrounded();
         //?Movement is disabled while jumping.. This Will affect gameplay
-        //TODO Is this still feel good to play
-        if (isGrounded) {
+        //TODO Is this still feel good to play - Disabling for testing
+        //if (isGrounded) {
             movement = GetInput();
-        }
+        //}
         
         //Remove all control if we are sliding
         if (!sliding) {
@@ -56,13 +59,15 @@ public class PlayerMovement : MonoBehaviour
 
             ModifyVelocityWhenJumping();
         }
-        if (Input.GetKeyDown(KeyCode.C) && rb.velocity.x != 0 && sliding == false) {
+        if (Input.GetKeyDown(KeyCode.C) && /* rb.velocity.x != 0 && */ sliding == false) {
             Slide();
             //TODO Draw Particle Effect
         }
     }
 
     private void Slide() {
+        
+        anim.Play("Sliding");
         rb.velocity = transform.right * slideForce;
         StartCoroutine(ToggleSlide());
     }
@@ -71,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
         sliding = true;
         yield return new WaitForSeconds(slideDelay);
         sliding = false;
+        
         rb.velocity = Vector3.zero;
     }
 
@@ -84,7 +90,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Jump() {
-        rb.velocity = Vector3.up * Jumpforce;
+            rb.velocity = Vector3.up * Jumpforce;
+
     }
 
     private void Flip() {
