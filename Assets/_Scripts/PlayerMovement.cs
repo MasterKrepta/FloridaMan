@@ -50,7 +50,10 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //transform.Translate(movement * speed * Time.deltaTime);
-            if (movement.x != 0 ) {
+            if (movement.x != 0) {
+                if (isGrounded) {
+                    anim.Play("Running");
+                }
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
             if (Input.GetButtonDown("Jump") && isGrounded) {
@@ -66,18 +69,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Slide() {
-        
-        anim.Play("Sliding");
-        rb.velocity = transform.right * slideForce;
         StartCoroutine(ToggleSlide());
     }
 
     IEnumerator ToggleSlide() {
         sliding = true;
+        anim.Play("Slide");
         yield return new WaitForSeconds(slideDelay);
         sliding = false;
-        
-        rb.velocity = Vector3.zero;
+
     }
 
     private void ModifyVelocityWhenJumping() {
@@ -90,8 +90,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Jump() {
-            rb.velocity = Vector3.up * Jumpforce;
-
+        anim.Play("Jump");
+        rb.velocity = Vector3.up * Jumpforce;
     }
 
     private void Flip() {

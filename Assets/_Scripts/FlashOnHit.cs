@@ -10,7 +10,7 @@ public class FlashOnHit : MonoBehaviour
     Renderer rend;
 
     private void OnEnable() {
-        original = GetComponent<Renderer>().material.color;
+        original = GetComponentInChildren<Renderer>().material.color;
         GameEvents.OnGooseHit += StartFlash;
     }
 
@@ -19,7 +19,7 @@ public class FlashOnHit : MonoBehaviour
         
     }
     IEnumerator Flash(Unit unit) {
-        rend = unit.GetComponent<Renderer>();
+        rend = unit.GetComponentInChildren<Renderer>();
         original = unit.GetComponent<FlashOnHit>().original;
 
         rend.material.color = HitColor;
