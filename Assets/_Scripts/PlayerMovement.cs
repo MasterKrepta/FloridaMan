@@ -12,13 +12,14 @@ public class PlayerMovement : MonoBehaviour
     //Jumping
     [SerializeField]bool isGrounded = false;
     Rigidbody rb;
+    BoxCollider collider;
     [SerializeField]float Jumpforce = 10f;
     bool facingRight = true;
     [SerializeField] float fallMulti = 2.5f;
     [SerializeField] float lowJumpMulti = 2f;
     [SerializeField] float slideForce = 7f;
     [SerializeField]bool sliding = false;
-    private float slideDelay = .5f;
+    private float slideDelay = .75f;
     [SerializeField] float initialJump = 20f;
     
 
@@ -26,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        collider = GetComponent<BoxCollider>();
+
         anim = GetComponentInChildren<Animator>();
         distToGround = GetComponent<Collider>().bounds.extents.y;
         rb = GetComponent<Rigidbody>();
@@ -48,12 +51,11 @@ public class PlayerMovement : MonoBehaviour
                 }
 
             }
-
+            
             //transform.Translate(movement * speed * Time.deltaTime);
+            anim.SetFloat("inputX", movement.x);
             if (movement.x != 0) {
-                if (isGrounded) {
-                    anim.Play("Running");
-                }
+                
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
             if (Input.GetButtonDown("Jump") && isGrounded) {
@@ -62,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
             ModifyVelocityWhenJumping();
         }
-        if (Input.GetKeyDown(KeyCode.C) && /* rb.velocity.x != 0 && */ sliding == false) {
+        if (isGrounded && Input.GetKeyDown(KeyCode.C) && /* rb.velocity.x != 0 && */ sliding == false) {
             Slide();
             //TODO Draw Particle Effect
         }
@@ -73,11 +75,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     IEnumerator ToggleSlide() {
+        ToggleCollider();
         sliding = true;
         anim.Play("Slide");
         yield return new WaitForSeconds(slideDelay);
         sliding = false;
+        ToggleCollider();
 
+    }
+
+    private void ToggleCollider() {
+        collider.isTrigger = !collider.isTrigger;
+        //rb.useGravity = !rb.useGravity;
     }
 
     private void ModifyVelocityWhenJumping() {
@@ -106,4 +115,6 @@ public class PlayerMovement : MonoBehaviour
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
 
+
+ 
 }

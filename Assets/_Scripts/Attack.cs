@@ -22,12 +22,14 @@ public class Attack : MonoBehaviour
     [SerializeField] float kickPower = 1.5f;
 
     Animator anim;
+    
     string leftPunch = "LeftPunch";
     string rightPunch = "RightPunch";
     string nextPunch;
 
     private void Awake() {
         anim = GetComponentInChildren<Animator>();
+        
         nextPunch = rightPunch;
     }
 
