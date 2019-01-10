@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SpawnParticles : MonoBehaviour
 {
-
     [SerializeField] GameObject particle;
     [SerializeField] float particleLifetime;
     // Start is called before the first frame update
@@ -19,6 +18,4 @@ public class SpawnParticles : MonoBehaviour
         GameObject go = Instantiate(particle, hit.point, Quaternion.identity);
         Destroy(go, particleLifetime);
     }
-
-    
 }
