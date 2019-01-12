@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     Jump jump;
     Rigidbody rb;
     BoxCollider collider;
-    
+    BoxCollider slideCollider;
     bool facingRight = true;
     
     [SerializeField] float slideForce = 7f;
@@ -24,7 +24,9 @@ public class PlayerMovement : MonoBehaviour
     {
         jump = GetComponent<Jump>();
         collider = GetComponent<BoxCollider>();
+        
         anim = GetComponentInChildren<Animator>();
+        slideCollider = anim.gameObject.GetComponent<BoxCollider>();
         distToGround = GetComponent<Collider>().bounds.extents.y;
         rb = GetComponent<Rigidbody>();
     }
@@ -67,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ToggleCollider() {
         collider.isTrigger = !collider.isTrigger;
+        slideCollider.enabled = !slideCollider.enabled;
         //rb.useGravity = !rb.useGravity;
     }
 

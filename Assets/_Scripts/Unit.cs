@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour, IDamaggable
 
     public void TakeDamage(Unit unit, float  dmg, RaycastHit hit) {
         //TODO slow down time when we are hit
+        //Debug.Log(this.name + " is hit " + CurrentHealth);
         unit.CurrentHealth -= dmg;
         GameEvents.OnGooseHit(this, hit);
         if (CurrentHealth <= 0) {

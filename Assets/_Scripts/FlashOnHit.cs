@@ -7,26 +7,28 @@ public class FlashOnHit : MonoBehaviour
     private float flashTime = .2f;
     [SerializeField]Color original;
     [SerializeField] Color HitColor;
-    Renderer rend;
+
 
     private void OnEnable() {
         original = GetComponentInChildren<Renderer>().material.color;
         GameEvents.OnGooseHit += StartFlash;
     }
 
+
     void StartFlash(Unit unit, RaycastHit hit) {
         StartCoroutine(Flash(unit));
-        
     }
     IEnumerator Flash(Unit unit) {
-        rend = unit.GetComponentInChildren<Renderer>();
+        Renderer[] renderers = unit.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers) {
+            r.material.color = HitColor;
+        }
         original = unit.GetComponent<FlashOnHit>().original;
-
-        rend.material.color = HitColor;
         yield return new WaitForSeconds(flashTime);
-        if (rend != null) {
-            
-            rend.material.color = original;
+        foreach (Renderer r in renderers) {
+            if (r != null) {
+                r.material.color = original;
+            }
         }
     }
 
