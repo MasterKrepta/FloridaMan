@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     bool facingRight = true;
     
     [SerializeField] float slideForce = 7f;
-    [SerializeField]bool sliding = false;
+    public bool sliding = false;
     private float slideDelay = .75f;
     
     void Start()

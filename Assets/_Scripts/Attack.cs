@@ -60,7 +60,7 @@ public class Attack : MonoBehaviour
             RaycastHit hit;
             //Debug.Log("Launch Low Attack");
             //Instantiate(hitMarker, KickPoint.position + new Vector3(kickRange,0,0), Quaternion.identity);
-            //? Should Kick include a knockback that punch does not (maybe it should fire slower)
+
             if (Physics.Raycast(KickPoint.position, KickPoint.right, out hit, kickRange, hitMask)) {
                 Unit unitHit = hit.transform.GetComponent<Unit>();
 

@@ -17,15 +17,16 @@ public class Unit : MonoBehaviour, IDamaggable
         //GameEvents.OnGooseHit += TakeDamage;
     }
     public void Die(Unit unit) {
-        
+        //TODO we will need to seperate the code out since player death will call more activities
         Destroy(unit.gameObject);
     }
 
     public void TakeDamage(Unit unit, float  dmg, RaycastHit hit) {
+        //? should i make a different player health script so we dont have to do so many checks in other code
         //TODO slow down time when we are hit
         //Debug.Log(this.name + " is hit " + CurrentHealth);
         unit.CurrentHealth -= dmg;
-        GameEvents.OnGooseHit(this, hit);
+        GameEvents.OnGooseHit(unit, hit);
         if (CurrentHealth <= 0) {
             GameEvents.OnGooseDied(this);
         }

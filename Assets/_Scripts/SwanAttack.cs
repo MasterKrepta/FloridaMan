@@ -10,12 +10,14 @@ public class SwanAttack : MonoBehaviour
     [SerializeField] float attackRange = 2f;
     [SerializeField] float attackPower = 1f;
     [SerializeField] float attackRate = 1.5f;
+    SwanStates swanStates;
     float nextAttack;
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<PlayerMovement>();
         playerHealth = player.GetComponent<Unit>();
+        swanStates = GetComponent<SwanStates>();
         nextAttack = Time.time + attackRate;
     }
 
@@ -24,11 +26,13 @@ public class SwanAttack : MonoBehaviour
     {
         float dist = Vector3.Distance(player.transform.position, this.transform.position);
         //Debug.Log(dist);
-        
 
-        if (dist <= attackRange && Time.time > nextAttack) {
-            StartAttack();
+        if (swanStates.currentState == SwanStates.AnimalStates.HOSTILE) {
+            if (dist <= attackRange && Time.time > nextAttack) {
+                StartAttack();
+            }
         }
+        
     }
 
     private void StartAttack() {
