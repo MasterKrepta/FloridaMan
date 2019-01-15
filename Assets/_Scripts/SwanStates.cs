@@ -10,7 +10,6 @@ public class SwanStates : MonoBehaviour
     public enum AnimalStates
     {
         DOCILE,
-        FEEDING,
         HOSTILE
     }
 
@@ -21,17 +20,21 @@ public class SwanStates : MonoBehaviour
     [SerializeField] float chargeRange = 10f;
     [SerializeField] float chargeSpeed = 1.2f;
 
-    [Header("FeedingState")]
-    Vector3 dest;
-    float dist;
-    [SerializeField]bool moving = false;
-    [SerializeField] float timeToFeed = 3f;
+    [Header("DocileState")]
+    [SerializeField] bool canMove = false;
+    [SerializeField] Vector3 dest = Vector3.zero;
+    [SerializeField]float distToGo;
+    float randomDistance;
+    Vector3 velocity;
+    [SerializeField] bool movingRight = true;
+    Rigidbody rb;
     [Range(3,10)] 
-    [SerializeField] float feedingDistance = 3;
-
+    [SerializeField] float moveDistance = 3;
+    [SerializeField] float waitTime = 5f;
 
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
+        rb = GetComponent<Rigidbody>();
         currentState = AnimalStates.DOCILE;
         GameEvents.OnGooseHit += this.BecomeHostile; //TODO this is sending the player as a unit which is wrong
     }
@@ -49,50 +52,65 @@ public class SwanStates : MonoBehaviour
         if (currentState == AnimalStates.HOSTILE) {
             HostileState();
         }
-        if (currentState == AnimalStates.DOCILE && !moving) {
-            StartCoroutine(TimeToNextFeeding());
-        }
-        if (currentState == AnimalStates.FEEDING) {
-            Debug.Log("We are feeding");
-            moving = false;
-            //GetNextFeedingPos();
-        }
-        if (moving) {
-            MoveSwan(dest);
-        }
+        if (currentState == AnimalStates.DOCILE) {
+            if (!canMove) {
+                Debug.Log("Need new pos");
+                GetNextPosition();
+            }
 
+            if (canMove) {
+                MoveSwan();
+            }        
+                
+        }
     }
 
-    private void MoveSwan(Vector3 dest) {
-        dist = Vector3.Distance(dest, this.transform.position);
-        transform.Translate(dest *moveSpeed * Time.deltaTime);
+    private void MoveSwan() {
+        velocity = new Vector3(moveSpeed * Time.deltaTime, 0, 0);
+        if (movingRight) {
+            transform.eulerAngles = Vector3.zero;
+            distToGo = Vector3.Distance(dest, this.transform.position);
+            distToGo = Mathf.Abs(distToGo);
+            
+            transform.Translate(velocity);
+            if (distToGo <= 1) {
+                dest = this.transform.position;
+
+                StartCoroutine(WaitForNextMove());
+            }
+        }
+        else {
+            transform.eulerAngles = new Vector3(0, 180, 0);
+            distToGo = Vector3.Distance(dest, this.transform.position);
+            distToGo = Mathf.Abs(distToGo);
+            transform.Translate(-velocity);
+            if (distToGo >= 1) {
+                dest = this.transform.position;
+
+                StartCoroutine(WaitForNextMove());
+            }
+        }
         
-        if (dist <= 1) {
-            Debug.Log("Done moving");
-            currentState = AnimalStates.DOCILE;
-            moving = false;
-        }
+      
     }
 
-    private void GetNextFeedingPos() {
-        int dir = UnityEngine.Random.Range(-1, 1);
-        if (dir == 0) {
-            dir = 1;
-        }
-        Debug.Log("New feedingpos");
-        float randX = UnityEngine.Random.Range(5, feedingDistance);
-        dest = new Vector3(randX * dir, 0, 0).normalized;
+    IEnumerator WaitForNextMove() {
+        dest = Vector3.zero;
+        canMove = false;
+        yield return new WaitForSeconds(waitTime);
+        canMove = true;
+        GetNextPosition();
+    }
+
+    private void GetNextPosition() {
+        movingRight = (UnityEngine.Random.value > 0.5f);
+        randomDistance = UnityEngine.Random.Range(5, moveDistance);
+        //dest = transform.position + transform.right * randomDistance;
+        //dest = new Vector3(Mathf.Round( randX), 0, 0);
         
     }
 
-    IEnumerator TimeToNextFeeding() {
-        Debug.Log("Docile");
-        currentState = AnimalStates.DOCILE;
-        yield return new WaitForSeconds(timeToFeed);
-        GetNextFeedingPos();
-        moving = true;
-        
-    }
+
 
     private void HostileState() {
         Debug.Log("Hostile");
