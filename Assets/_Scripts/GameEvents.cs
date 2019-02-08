@@ -10,7 +10,7 @@ public static class GameEvents
     public static Action OnPlayerHit = delegate { };
 
     //public static Action<Unit> OnGooseHit = delegate { };
-    public static Action<Unit, RaycastHit> OnGooseHit = delegate { };
+    public static Action<Unit> OnGooseHit = delegate { };
     public static Action<Unit> OnKnockBack = delegate { };
     public static Action<Unit> OnGooseDied = delegate { };
 

@@ -21,12 +21,12 @@ public class Unit : MonoBehaviour, IDamaggable
         Destroy(unit.gameObject);
     }
 
-    public void TakeDamage(Unit unit, float  dmg, RaycastHit hit) {
+    public void TakeDamage(Unit unit, float  dmg) {
         //? should i make a different player health script so we dont have to do so many checks in other code
         //TODO slow down time when we are hit
         //Debug.Log(this.name + " is hit " + CurrentHealth);
         unit.CurrentHealth -= dmg;
-        GameEvents.OnGooseHit(unit, hit);
+        GameEvents.OnGooseHit(unit);
         if (CurrentHealth <= 0) {
             GameEvents.OnGooseDied(this);
         }

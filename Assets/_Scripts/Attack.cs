@@ -48,7 +48,7 @@ public class Attack : MonoBehaviour
 
                 //Instantiate(hitMarker, hit.point, Quaternion.identity);
 
-                unitHit.TakeDamage(unitHit, punchPower, hit);
+                unitHit.TakeDamage(unitHit, punchPower);
                 //GameEvents.OnGooseHit(unitHit, punchPower);
             }
             StartCoroutine(PunchCooldown());
@@ -66,7 +66,7 @@ public class Attack : MonoBehaviour
 
                 //Instantiate(hitMarker, hit.point, Quaternion.identity);
 
-                unitHit.TakeDamage(unitHit, kickPower, hit);
+                unitHit.TakeDamage(unitHit, kickPower);
                 GameEvents.OnKnockBack(unitHit);
                 //GameEvents.OnGooseHit(hit.collider.GetComponent<Unit>(), kickPower);
 

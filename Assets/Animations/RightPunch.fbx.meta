@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a4a6d2247d135c644a732b862392556c
+guid: ddcf44e04e9e9eb45bc2d0d7c70f0ec7
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -244,7 +244,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: mixamorig:Hips
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

@@ -6,6 +6,6 @@ public interface IDamaggable
 {
     float CurrentHealth { get; set; }
     float MaxHealth { get; set; }
-    void TakeDamage(Unit unit, float dmg, RaycastHit hit);
+    void TakeDamage(Unit unit, float dmg);
     void Die(Unit unit);
 }

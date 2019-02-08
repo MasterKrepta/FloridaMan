@@ -39,7 +39,7 @@ public class SwanStates : MonoBehaviour
         GameEvents.OnGooseHit += this.BecomeHostile; //TODO this is sending the player as a unit which is wrong
     }
 
-    void BecomeHostile(Unit unit, RaycastHit hit) {
+    void BecomeHostile(Unit unit) {
         //TODO see note above to fix this
         if (unit.GetComponent<SwanStates>() != null) {
             unit.GetComponent<SwanStates>().currentState = AnimalStates.HOSTILE;

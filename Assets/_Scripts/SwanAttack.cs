@@ -39,7 +39,7 @@ public class SwanAttack : MonoBehaviour
         RaycastHit hit;
         nextAttack = Time.time + attackRate;
         if (Physics.Raycast(transform.position, transform.right, out hit, attackRange)) {
-            playerHealth.TakeDamage(playerHealth, attackPower, hit);
+            playerHealth.TakeDamage(playerHealth, attackPower);
         }
     }
 }

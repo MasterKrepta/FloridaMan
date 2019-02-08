@@ -14,8 +14,8 @@ public class SpawnParticles : MonoBehaviour
         
     }
 
-    void CreateParatileAtPoint(Unit unit, RaycastHit hit) {
-        GameObject go = Instantiate(particle, hit.point, Quaternion.identity);
+    void CreateParatileAtPoint(Unit unit) {
+        GameObject go = Instantiate(particle, transform.position, Quaternion.identity);
         Destroy(go, particleLifetime);
     }
 }

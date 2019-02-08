@@ -15,7 +15,7 @@ public class FlashOnHit : MonoBehaviour
     }
 
 
-    void StartFlash(Unit unit, RaycastHit hit) {
+    void StartFlash(Unit unit) {
         StartCoroutine(Flash(unit));
     }
     IEnumerator Flash(Unit unit) {
