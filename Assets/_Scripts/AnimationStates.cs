@@ -38,6 +38,24 @@ public class AnimationStates : MonoBehaviour
     }
 
     void Grab_OFF() {
+        float grabBuffer = 2f;
+
+        Transform grabPoint = FindObjectOfType<Grab>().transform;
+        try {
+            Transform child = grabPoint.GetChild(0);
+            grabPoint.DetachChildren();
+
+            child.rotation = Quaternion.identity;
+            if (grabPoint.position.x < child.position.x) {
+                grabBuffer *= -1;
+            }
+            child.transform.position = new Vector3(child.transform.position.x + grabBuffer, 0.77f, 0);
+        }
+        catch (System.Exception) {
+
+        }
+     
         GrabPoint.SetActive(false);
     }
+
 }

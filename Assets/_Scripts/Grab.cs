@@ -7,6 +7,7 @@ public class Grab : MonoBehaviour
 
     public LayerMask collLayer;
     public float Radius = 1f;
+    Unit unitHit = null;
 
     private void Update() {
         DetectCollision();
@@ -16,10 +17,18 @@ public class Grab : MonoBehaviour
         Collider[] hit = Physics.OverlapSphere(transform.position, Radius, collLayer);
 
         if (hit.Length > 0) {
-            Unit unitHit = hit[0].GetComponent<Unit>();
+            unitHit = hit[0].GetComponent<Unit>();
+
+            unitHit.transform.parent = this.transform;
             
 
             //gameObject.SetActive(false);
         }
+
+       
     }
+
+
+
+    
 }
