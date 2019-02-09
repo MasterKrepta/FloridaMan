@@ -7,10 +7,7 @@ public class CauseDamage : MonoBehaviour
     public LayerMask collLayer;
     public float Radius = 1f;
     public float Damage = 2f;
-    
-
     public GameObject hitFX;
-
 
     private void Update() {
         DetectCollision();
@@ -31,10 +28,9 @@ public class CauseDamage : MonoBehaviour
                 hitfxPos.x -= 0.3f;
             }
 
-      
             hit[0].GetComponent<Unit>().TakeDamage(unitHit, Damage);
       
-            print("We hit " + hit[0].name + " with the attack point: -> " + this.name);
+            //Debug.Log("We hit " + hit[0].name + " with the attack point: -> " + this.name);
 
             gameObject.SetActive(false);
         }

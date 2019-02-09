@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnParticles : MonoBehaviour
 {
     [SerializeField] GameObject particle;
-    [SerializeField] float particleLifetime;
+    [SerializeField] float particleLifetime = 0.2f;
     // Start is called before the first frame update
 
     private void Start() {
@@ -14,8 +14,9 @@ public class SpawnParticles : MonoBehaviour
         
     }
 
-    void CreateParatileAtPoint(Unit unit) {
-        GameObject go = Instantiate(particle, transform.position, Quaternion.identity);
+    void CreateParatileAtPoint(IDamaggable unit) {
+        Transform unitHit = unit.DamaggableTransform;
+        GameObject go = Instantiate(particle, unitHit.position, Quaternion.identity);
         Destroy(go, particleLifetime);
     }
 }

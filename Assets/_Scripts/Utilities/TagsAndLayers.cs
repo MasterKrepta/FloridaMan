@@ -8,6 +8,7 @@ public class TagsAndLayers : MonoBehaviour
     public const string RIGHTPUNCH = "RightPunch";
     public const string KICKING = "Kick";
     public const string STABBING = "Stabbing";
+    public const string MOVING = "Moving";
 
     public class Tags
     {

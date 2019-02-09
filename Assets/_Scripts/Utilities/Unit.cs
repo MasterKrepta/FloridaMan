@@ -7,13 +7,14 @@ public class Unit : MonoBehaviour, IDamaggable
 
     public float CurrentHealth { get; set ; }
     public float MaxHealth { get; set; }
+    public Transform DamaggableTransform { get; set; }
 
-    
     [SerializeField] float maxHealthSetter;
 
     private void OnEnable() {
         CurrentHealth = maxHealthSetter;
         GameEvents.OnGooseDied += Die;
+        DamaggableTransform = this.transform;
         //GameEvents.OnGooseHit += TakeDamage;
     }
     public void Die(Unit unit) {
@@ -21,7 +22,7 @@ public class Unit : MonoBehaviour, IDamaggable
         Destroy(unit.gameObject);
     }
 
-    public void TakeDamage(Unit unit, float  dmg) {
+    public void TakeDamage(IDamaggable unit, float  dmg) {
         //? should i make a different player health script so we dont have to do so many checks in other code
         //TODO slow down time when we are hit
         //Debug.Log(this.name + " is hit " + CurrentHealth);

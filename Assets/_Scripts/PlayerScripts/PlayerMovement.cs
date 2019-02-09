@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     BoxCollider collider;
     BoxCollider slideCollider;
-    bool facingRight = true;
+
     
     [SerializeField] float slideForce = 7f;
     public bool sliding = false;
@@ -30,23 +30,32 @@ public class PlayerMovement : MonoBehaviour
         distToGround = GetComponent<Collider>().bounds.extents.y;
         rb = GetComponent<Rigidbody>();
     }
+
     private void Update() {
+        Rotation();
+    }
+    private void FixedUpdate() {
         movement = GetInput();
         
         //Remove all control if we are sliding
         if (!sliding) {
-            if (movement.x < 0) {
-                Flip();
-            } else {
-                if (movement != Vector3.zero) { // Prevent flipping if we stop while facing left
-                    transform.eulerAngles = new Vector3(0, 0, 0);
-                }
-            }
-            
-            anim.SetFloat("inputX", movement.x);
+            //if (movement.x < 0) {
+            //    Flip();
+            //} else {
+            //    if (movement != Vector3.zero) { // Prevent flipping if we stop while facing left
+            //        transform.eulerAngles = new Vector3(0, 0, 0);
+            //    }
+            //}
+
             if (movement.x != 0) {
+                anim.SetBool(TagsAndLayers.MOVING, true);
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
+            else {
+                anim.SetBool(TagsAndLayers.MOVING, false);
+            }
+
+            
         }
         if (jump.isGrounded && Input.GetKeyDown(KeyCode.C) && /* rb.velocity.x != 0 && */ sliding == false) {
             Slide();
@@ -73,8 +82,13 @@ public class PlayerMovement : MonoBehaviour
         //rb.useGravity = !rb.useGravity;
     }
 
-    private void Flip() {
-        transform.eulerAngles = new Vector3(0, 180, 0);
+    private void Rotation() {
+        if (Input.GetAxisRaw("Horizontal") > 0) {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (Input.GetAxisRaw("Horizontal") < 0) {
+            transform.rotation = Quaternion.Euler(0, -180f, 0);
+        }
     }
 
     private Vector3 GetInput() {

@@ -18,7 +18,7 @@ public class Grab : MonoBehaviour
 
         if (hit.Length > 0) {
             unitHit = hit[0].GetComponent<Unit>();
-
+            unitHit.GetComponent<BoxCollider>().enabled = false;
             unitHit.transform.parent = this.transform;
             
 

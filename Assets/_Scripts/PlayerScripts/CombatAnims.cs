@@ -21,4 +21,12 @@ public class CombatAnims : MonoBehaviour
     public void ActivateStab() {
         anim.SetTrigger(TagsAndLayers.STABBING);
     }
+
+    public void SetMoving() {
+        anim.SetBool(TagsAndLayers.MOVING, true);
+    }
+
+    public void SetIdle() {
+        anim.SetBool(TagsAndLayers.MOVING, false);
+    }
 }
