@@ -8,7 +8,7 @@ public float CurrentHealth { get; set ; }
     public float MaxHealth { get; set; }
     public Transform DamaggableTransform { get; set; }
 
-    [SerializeField] float maxHealthSetter;
+    [SerializeField] float maxHealthSetter = 50;
 
     private void OnEnable() {
         ResetHealthOnRespawn();

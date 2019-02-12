@@ -15,7 +15,8 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cameraOffset = new Vector3(player.position.x, 6.5f, this.transform.position.z);
+        cameraOffset = new Vector3(player.position.x, 6.5f, -20f);
         transform.position = cameraOffset;
+        transform.rotation = Quaternion.identity;
     }
 }

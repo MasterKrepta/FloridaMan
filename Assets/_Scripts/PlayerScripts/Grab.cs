@@ -17,6 +17,7 @@ public class Grab : MonoBehaviour
         Collider[] hit = Physics.OverlapSphere(transform.position, Radius, collLayer);
 
         if (hit.Length > 0) {
+            GameEvents.OnEffectMode_ON();
             unitHit = hit[0].GetComponent<Unit>();
             unitHit.GetComponent<BoxCollider>().enabled = false;
             unitHit.transform.parent = this.transform;

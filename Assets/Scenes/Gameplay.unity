@@ -287,7 +287,7 @@ PrefabInstance:
     - target: {fileID: 352485095371381594, guid: 47c216a1349608b4c87248e3b7aad5b4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.6
+      value: 10.7
       objectReference: {fileID: 0}
     - target: {fileID: 352485095371381594, guid: 47c216a1349608b4c87248e3b7aad5b4,
         type: 3}
@@ -337,6 +337,10 @@ PrefabInstance:
     - target: {fileID: 352485095371381594, guid: 47c216a1349608b4c87248e3b7aad5b4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 527393847, guid: 47c216a1349608b4c87248e3b7aad5b4, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1567,6 +1571,7 @@ GameObject:
   - component: {fileID: 996797021}
   - component: {fileID: 996797024}
   - component: {fileID: 996797025}
+  - component: {fileID: 996797026}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1631,8 +1636,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996797020}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.2, z: -13.46}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6, y: 6.5, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1650,7 +1655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa8645962222944f805b4afd963424e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraOffset: {x: 0, y: 0, z: 0}
+  cameraOffset: {x: 0, y: 6.5, z: -20}
 --- !u!114 &996797025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1666,6 +1671,22 @@ MonoBehaviour:
   particle: {fileID: 7215169060298991482, guid: b63d29690f39ea1498aaf8db8e3989a8,
     type: 3}
   particleLifetime: 0.2
+--- !u!114 &996797026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996797020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c99c2d8c63da4444b447307f72a860c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowDownTime: 0.4
+  animateTime: 1
+  camSpeed: 3
+  camOffset: {x: 3, y: 0, z: 0}
 --- !u!1 &1101088355
 GameObject:
   m_ObjectHideFlags: 0
@@ -2919,7 +2940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54e4b339b0746f47bd92a82f917d881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthSetter: 2
+  maxHealthSetter: 50
 --- !u!1 &2109540443
 GameObject:
   m_ObjectHideFlags: 0

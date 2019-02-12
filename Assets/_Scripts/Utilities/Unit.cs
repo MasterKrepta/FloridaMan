@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour, IDamaggable
     public float MaxHealth { get; set; }
     public Transform DamaggableTransform { get; set; }
 
-    [SerializeField] float maxHealthSetter;
+    [SerializeField] float maxHealthSetter = 10;
 
     private void OnEnable() {
         CurrentHealth = maxHealthSetter;

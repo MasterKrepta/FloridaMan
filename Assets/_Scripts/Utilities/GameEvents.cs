@@ -17,4 +17,7 @@ public static class GameEvents
     public static Action OnPlayerRespawn = delegate { };
     public static Action OnPlayerAlive = delegate { };
 
+    public static Action OnEffectMode_ON = delegate { };
+    public static Action OnEffectMode_OFF = delegate { };
+
 }

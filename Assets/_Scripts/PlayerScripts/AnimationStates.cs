@@ -10,6 +10,10 @@ public class AnimationStates : MonoBehaviour
     SwanAttack attack = null;
     BoxCollider swanCollider = null;
     Rigidbody rb;
+
+    private void Awake() {
+        
+    }
     void RightHand_ON() {
         RightHand.SetActive(true);
     }
@@ -38,10 +42,12 @@ public class AnimationStates : MonoBehaviour
     }
 
     void Grab_ON() {
+        
         GrabPoint.SetActive(true);
     }
 
     void Grab_OFF() {
+        
         //TODO Get a grab buffer working
         float grabBuffer = 2f;
         
@@ -59,6 +65,7 @@ public class AnimationStates : MonoBehaviour
                 move.enabled = false;
                 swanCollider.enabled = false;
                 rb.velocity = Vector3.zero;
+                
             }
             catch (System.Exception) {
                 //todo  This wont work with any type that doesnt have the swan scripts on it
@@ -70,6 +77,7 @@ public class AnimationStates : MonoBehaviour
             origRot = child.rotation;
 
             grabPoint.DetachChildren();
+            GameEvents.OnEffectMode_OFF();
 
             child.rotation = Quaternion.identity;
 
