@@ -11,10 +11,9 @@ public class SlowDownEffect : MonoBehaviour
     [SerializeField] float camSpeed = 5f;
     Camera mainCam;
     
-    [SerializeField] Vector3 camOffset;
+    [SerializeField] Vector3 camOffset = new Vector3(3,0,0);
     Vector3 origCameraPos;
 
-    
     CameraFollow cameraFollow;
     PlayerMovement playerMove;
     
@@ -45,7 +44,6 @@ public class SlowDownEffect : MonoBehaviour
         float duration = 1.0f;
         for (float t = 0.0f; t < duration; t += Time.deltaTime) {
             mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, player.position + camOffset, Time.deltaTime * camSpeed);
-
             mainCam.transform.LookAt(player);
             yield return 0;
         }

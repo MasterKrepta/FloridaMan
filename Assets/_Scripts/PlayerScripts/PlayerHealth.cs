@@ -41,7 +41,7 @@ public float CurrentHealth { get; set ; }
     public void TakeDamage(IDamaggable unit, float  dmg) {
         
         //TODO slow down time when we are hit
-        Debug.Log(this.name + " is hit " + CurrentHealth);
+        //Debug.Log(this.name + " is hit " + CurrentHealth);
         unit.CurrentHealth -= dmg;
         GameEvents.OnPlayerHit(unit);
         if (CurrentHealth <= 0) {

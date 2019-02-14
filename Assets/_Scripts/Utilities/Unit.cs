@@ -7,11 +7,13 @@ public class Unit : MonoBehaviour, IDamaggable
 
     public float CurrentHealth { get; set ; }
     public float MaxHealth { get; set; }
+    public int PointsToGive { get; set; }
     public Transform DamaggableTransform { get; set; }
 
     [SerializeField] float maxHealthSetter = 10;
 
     private void OnEnable() {
+        PointsToGive = 1;
         CurrentHealth = maxHealthSetter;
         GameEvents.OnGooseDied += Die;
         DamaggableTransform = this.transform;

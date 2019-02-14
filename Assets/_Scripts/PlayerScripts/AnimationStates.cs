@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimationStates : MonoBehaviour
 {
-    [SerializeField] GameObject RightHand, LeftHand, RightLeg, LeftLeg, GrabPoint;
+    [SerializeField] GameObject RightHand = null, LeftHand = null, RightLeg = null, LeftLeg = null, GrabPoint = null;
 
     SwanMove move = null;
     SwanAttack attack = null;
@@ -66,6 +66,7 @@ public class AnimationStates : MonoBehaviour
                 swanCollider.enabled = false;
                 rb.velocity = Vector3.zero;
                 
+
             }
             catch (System.Exception) {
                 //todo  This wont work with any type that doesnt have the swan scripts on it

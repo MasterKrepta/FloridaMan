@@ -13,27 +13,18 @@ public class SwanAttack : MonoBehaviour
     
     float nextAttack;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         player = FindObjectOfType<PlayerMovement>();
         playerHealth = player.GetComponent<PlayerHealth>();
-    
         nextAttack = Time.time + attackRate;
-
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         float dist = Vector3.Distance(player.transform.position, this.transform.position);
-        //Debug.Log(dist);
-
-        //if (swanStates.currentState == SwanStates.AnimalStates.HOSTILE) {
             if (dist <= attackRange && Time.time > nextAttack) {
                 StartAttack();
             }
-        //}
-        
     }
 
     private void StartAttack() {
@@ -43,6 +34,4 @@ public class SwanAttack : MonoBehaviour
             playerHealth.TakeDamage(playerHealth, attackPower);
         }
     }
-
-    
 }

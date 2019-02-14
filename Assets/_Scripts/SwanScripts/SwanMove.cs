@@ -9,18 +9,14 @@ public class SwanMove : MonoBehaviour
     PlayerMovement player;
     bool movingRight = true;
 
-    // Start is called before the first frame update
     void Awake()
     {
         player = FindObjectOfType<PlayerMovement>();
         rb = GetComponent<Rigidbody>();
         GameEvents.OnPlayerDied += DisableScripts;
         GameEvents.OnPlayerAlive += EnableScripts;
-
-        //TODO set up Respawn Event
     }
 
-    // Update is called once per frame
     private void Update() {
         Rotation();
     }
@@ -32,7 +28,6 @@ public class SwanMove : MonoBehaviour
         else {
             rb.velocity = new Vector3(-Vector3.right.x * moveSpeed, rb.velocity.y, rb.velocity.z);
         }
-        
     }
 
     private void Rotation() {
@@ -54,13 +49,11 @@ public class SwanMove : MonoBehaviour
 
     void EnableScripts() {
         GetComponent<SwanAttack>().enabled = true;
-        //GetComponent<Rigidbody>().velocity = Vector3.zero;
         this.enabled = true;
     }
 
     private void OnDestroy() {
     GameEvents.OnPlayerDied -= DisableScripts;
     GameEvents.OnPlayerAlive -= EnableScripts;
-
     }
 }

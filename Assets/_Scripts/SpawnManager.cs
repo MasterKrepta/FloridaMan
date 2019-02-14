@@ -22,7 +22,7 @@ public class SpawnManager : MonoBehaviour
             Transform randPoint = SpawnPoints[Random.Range(0, SpawnPoints.Count)];
             GameObject s = Instantiate(Enemies[0], randPoint.position, Quaternion.identity);
             s.transform.SetParent(this.transform);
-            Debug.Log(randPoint + " removed");
+            //Debug.Log(randPoint + " removed");
             SpawnPoints.Remove(randPoint);
         }
         RestSpawnPoints();
