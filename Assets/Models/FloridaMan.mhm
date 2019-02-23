@@ -1,0 +1,27 @@
+# Written by MakeHuman 1.2.0
+version v1.2.0
+camera 5.0 15.0 -0.0156813558303 0.81117468658 -0.109816872446 1.5500000000000007
+modifier head/head-angle-in|out -1.000000
+modifier head/head-fat-decr|incr -1.000000
+modifier head/head-rectangular 0.177000
+modifier head/head-invertedtriangular 0.959000
+modifier breast/BreastSize 0.500000
+modifier breast/BreastFirmness 0.500000
+modifier macrodetails/Gender 1.000000
+modifier macrodetails/Age 0.500000
+modifier macrodetails/African 0.000000
+modifier macrodetails/Asian 0.500000
+modifier macrodetails/Caucasian 0.500000
+modifier macrodetails-universal/Muscle 1.000000
+modifier macrodetails-universal/Weight 0.293000
+modifier macrodetails-height/Height 0.599000
+modifier macrodetails-proportions/BodyProportions 0.537000
+eyebrows eyebrow011 19e43555-4613-4457-ac6e-c30bf350d275
+eyes HighPolyEyes 2c12f43b-1303-432c-b7ce-d78346baf2e6
+clothes shoes03 ad622a26-da1e-4e3c-9f8e-454edf10d504
+clothes male_casualsuit01 79ced554-1d8a-4c14-a6a8-e1de90b09c32
+clothesHideFaces True
+skinMaterial skins/default.mhmat
+material HighPolyEyes 2c12f43b-1303-432c-b7ce-d78346baf2e6 eyes/materials/brown.mhmat
+material eyebrow011 19e43555-4613-4457-ac6e-c30bf350d275 eyebrow011.mhmat
+subdivide False
