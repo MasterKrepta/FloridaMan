@@ -34,6 +34,32 @@ ModelImporter:
     100056: Bone_9
     100058: Long_Wing_001
     100060: Wing_Rigg_001
+    100062: Body
+    100064: body
+    100066: EndTarget
+    100068: EndTarget_0
+    100070: firstTarget
+    100072: firstTarget_0
+    100074: Foot_L
+    100076: Foot_L_001
+    100078: head
+    100080: Hinge
+    100082: Hinge_0
+    100084: holder
+    100086: holder_0
+    100088: LegBottom_L
+    100090: LegBottom_L_001
+    100092: LegUpper_L
+    100094: LegUpper_R_001
+    100096: middleTarget
+    100098: middleTarget_0
+    100100: neck1
+    100102: neck2
+    100104: neck3
+    100106: Wing
+    100108: Wing_001
+    100110: Wing_003
+    100112: Wing_004
     400000: Bone
     400002: Bone_0
     400004: Bone_001
@@ -65,6 +91,32 @@ ModelImporter:
     400056: Bone_9
     400058: Long_Wing_001
     400060: Wing_Rigg_001
+    400062: Body
+    400064: body
+    400066: EndTarget
+    400068: EndTarget_0
+    400070: firstTarget
+    400072: firstTarget_0
+    400074: Foot_L
+    400076: Foot_L_001
+    400078: head
+    400080: Hinge
+    400082: Hinge_0
+    400084: holder
+    400086: holder_0
+    400088: LegBottom_L
+    400090: LegBottom_L_001
+    400092: LegUpper_L
+    400094: LegUpper_R_001
+    400096: middleTarget
+    400098: middleTarget_0
+    400100: neck1
+    400102: neck2
+    400104: neck3
+    400106: Wing
+    400108: Wing_001
+    400110: Wing_003
+    400112: Wing_004
     2100000: unnamed
     2300000: LowPolySwan
     3300000: LowPolySwan
@@ -72,16 +124,22 @@ ModelImporter:
     4300002: LowPolySwan
     4300004: Long_Wing
     4300006: Long_Wing_001
+    4300008: Wing_004
+    4300010: Wing_001
     7400000: Default Take
     7400002: SwanBodyAttack
     7400004: SwanBodyWalk
     7400006: WingAttack
     7400008: WingRigWalk
     7400010: WingAttack_001
+    7400012: WingAttack_002
     9500000: //RootNode
     13700000: Long_Wing
     13700002: LowPolySwan_001
     13700004: Long_Wing_001
+    13700006: LowPolySwan
+    13700008: Wing_001
+    13700010: Wing_004
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
