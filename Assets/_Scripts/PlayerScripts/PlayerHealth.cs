@@ -1,10 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour, IDamaggable
 {
-public float CurrentHealth { get; set ; }
+    private float currentHealth;
+    [SerializeField]Slider UIplayerHealthSlider;
+    [SerializeField] 
+public float CurrentHealth {
+        get{ return currentHealth; }
+
+        set {
+            currentHealth = value;
+            GameEvents.OnPlayerHealthChange();
+        }
+}
     public float MaxHealth { get; set; }
     public Transform DamaggableTransform { get; set; }
 
@@ -13,11 +23,13 @@ public float CurrentHealth { get; set ; }
     private void OnEnable() {
         ResetHealthOnRespawn();
         GameEvents.OnPlayerDied += PlayerDeath;
-        GameEvents.OnPlayerRespawn += ResetHealthOnRespawn;
+        GameEvents.OnPlayerAlive += ResetHealthOnRespawn;
         DamaggableTransform = this.transform;
-        //GameEvents.OnGooseHit += TakeDamage;
-        
+
+        GameEvents.OnPlayerHealthChange += UpdateHealhUI;
+
     }
+
     public void Die(Unit unit) {
         
     }
@@ -61,8 +73,12 @@ public float CurrentHealth { get; set ; }
     private void OnDestroy() {
         //GameEvents.OnGooseHit -= TakeDamage;
         GameEvents.OnPlayerDied -= PlayerDeath;
-        GameEvents.OnPlayerRespawn -= ResetHealthOnRespawn;
+        GameEvents.OnPlayerAlive -= ResetHealthOnRespawn;
+        GameEvents.OnPlayerHealthChange -= UpdateHealhUI;
 
+    }
 
+    void UpdateHealhUI() {
+        UIplayerHealthSlider.value = currentHealth / maxHealthSetter;
     }
 }
