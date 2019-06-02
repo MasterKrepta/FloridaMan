@@ -10,29 +10,37 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameEvents.OnGooseDied += Spawn;
+        
+        GameEvents.OnWaveStart += Spawn;
 
-        RestSpawnPoints();
+        ResetSpawnPoints();
     }
 
-    void Spawn(IDamaggable unit) {
+    void Spawn() {
         int numToSpawn = Random.Range(1, SpawnPoints.Count);
 
         for (int i = 0; i < numToSpawn; i++) {
             Transform randPoint = SpawnPoints[Random.Range(0, SpawnPoints.Count)];
             GameObject s = Instantiate(Enemies[0], randPoint.position, Quaternion.identity);
             s.transform.SetParent(this.transform);
-            //Debug.Log(randPoint + " removed");
             SpawnPoints.Remove(randPoint);
         }
-        RestSpawnPoints();
+        ResetSpawnPoints();
 
     }
 
-    void RestSpawnPoints() {
+    void ResetSpawnPoints() {
         SpawnPoints.Clear();
         for (int i = 0; i < allSpawnpoints.childCount; i++) {
             SpawnPoints.Add(allSpawnpoints.GetChild(i));
         }
+    }
+
+    void StartOfWave() {
+
+    }
+
+    void EndOfWave() {
+
     }
 }

@@ -21,4 +21,7 @@ public static class GameEvents
     public static Action OnEffectMode_ON = delegate { };
     public static Action OnEffectMode_OFF = delegate { };
 
+    public static Action OnWaveStart = delegate { };
+    public static Action OnWaveEnd = delegate { };
+
 }
