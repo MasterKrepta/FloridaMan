@@ -6,12 +6,13 @@ public class SwanMove : MonoBehaviour
 {
     Rigidbody rb;
     [SerializeField] float moveSpeed = 2;
-    PlayerMovement player;
+    public Vector3 lookOffset = new Vector3(0, 0.75f, 0);
+    Transform player;
     bool movingRight = true;
 
     void Awake()
     {
-        player = FindObjectOfType<PlayerMovement>();
+        player = GameObject.FindGameObjectWithTag(TagsAndLayers.Player).transform;
         rb = GetComponent<Rigidbody>();
         GameEvents.OnPlayerDied += DisableScripts;
         GameEvents.OnPlayerAlive += EnableScripts;
@@ -19,6 +20,10 @@ public class SwanMove : MonoBehaviour
 
     private void Update() {
         Rotation();
+        if (player.position.y < 1) { // prevent us from looking in the air
+            transform.LookAt(player.position + lookOffset);
+        }
+        
     }
     void FixedUpdate()
     {

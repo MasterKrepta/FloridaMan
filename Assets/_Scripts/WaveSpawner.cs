@@ -6,7 +6,7 @@ public class WaveSpawner : MonoBehaviour
 {
 
     private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag(TagsAndLayers.Tags.Player)) {
+        if (other.CompareTag(TagsAndLayers.Player)) {
             GameEvents.OnWaveStart();
             GameObject.Destroy(this.gameObject);
         }

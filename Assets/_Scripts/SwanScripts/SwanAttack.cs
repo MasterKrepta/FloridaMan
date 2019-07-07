@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SwanAttack : MonoBehaviour
 {
-    PlayerMovement player;
+    Transform player;
     PlayerHealth playerHealth;
     [SerializeField] float attackRange = 2f;
     [SerializeField] float attackPower = 1f;
@@ -14,7 +14,7 @@ public class SwanAttack : MonoBehaviour
     float nextAttack;
     // Start is called before the first frame update
     void Start() {
-        player = FindObjectOfType<PlayerMovement>();
+        player = GameObject.FindGameObjectWithTag(TagsAndLayers.Player).transform;
         playerHealth = player.GetComponent<PlayerHealth>();
         nextAttack = Time.time + attackRate;
     }
